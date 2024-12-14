@@ -1,0 +1,94 @@
+.char {
+    display: inline-block;
+    transform: translateY(var(--y, 20%));
+    transition: transform 0.4s cubic-bezier(.77, 0, .175, 1);
+    transition-delay: calc(0.04s * var(--char-index))
+}
+
+.is-active {
+    --y: 0
+}
+
+#loading {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 0;
+    left: 0;
+    top: 0;
+    min-height: 100vh;
+    background-image: repeating-linear-gradient(to bottom right, #fff, #6AC1B7);
+    background-size: 1000% 1000%;
+    animation: colorRotation 20s linear 0s infinite
+}
+
+@keyframes colorRotation {
+    from {
+        background-position: 0 0
+    }
+
+    to {
+        background-position: 500% 500%
+    }
+}
+
+.loader {
+    width: 600px;
+    z-index: 1;
+    aspect-ratio: 1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%)
+}
+
+.loader:before,
+.loader:after {
+    content: "";
+    position: absolute;
+    border-radius: 50px;
+    box-shadow: 0 0 0 3px inset #ddd;
+    animation: l4 2.5s infinite
+}
+
+.loader:after {
+    animation-delay: -1.25s
+}
+
+@keyframes l4 {
+    0% {
+        inset: 0 100px 100px 0
+    }
+
+    12.5% {
+        inset: 0 100px 0 0
+    }
+
+    25% {
+        inset: 100px 100px 0 0
+    }
+
+    37.5% {
+        inset: 100px 0 0 0
+    }
+
+    50% {
+        inset: 100px 0 0 100px
+    }
+
+    62.5% {
+        inset: 0 0 0 100px
+    }
+
+    75% {
+        inset: 0 0 100px 100px
+    }
+
+    87.5% {
+        inset: 0 0 100px 0
+    }
+
+    100% {
+        inset: 0 100px 100px 0
+    }
+}

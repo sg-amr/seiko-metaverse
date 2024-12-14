@@ -3,8 +3,6 @@ import {
     Route,
     Routes
 } from "react-router-dom";
-import { useState, useEffect } from 'react'
-import { useNavigate } from "react-router-dom";
 
 // all page components
 import IndexPage from "./pages/index.tsx";
@@ -14,40 +12,29 @@ import SettingPage from "./pages/setting.tsx";
 import UserPage from "./pages/user.tsx";
 import SigninPage from "./pages/signin.tsx";
 import SignupPage from "./pages/signup.tsx";
-import NotFoundPage from "./pages/NotFound.tsx";
+import NotFoundPage from "./pages/notFound.tsx";
+import PrivacyPage from "./pages/privacyPage.tsx";
 
 // layout components
 import Layout from "./layout/layout.tsx"
+import LayoutPlay from "./layout/layoutPlay.tsx"
 
-const WrappedIndexPage = () => {
-    const [path, setPath] = useState<string | null>("");
-    const navigation = useNavigate();
-
-    useEffect(() => {
-        const url = new URL(window.location.href);
-        const params = url.searchParams;
-        setPath(params.get("path"));
-        if (!path) return;
-        navigation(path);
-    }, [])
-    return (
-        <>
-            <IndexPage />
-        </>
-    )
-}
+// import css
+import "./global.css"
 
 const AppRouter = () => {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path='/' element={<Layout><WrappedIndexPage /></Layout>} />
+                <Route path='/' element={<Layout><IndexPage /></Layout>} />
                 <Route path='/about' element={<Layout><AboutPage /></Layout>} />
-                <Route path='/play' element={<Layout><PlayPage /></Layout>} />
                 <Route path='/setting' element={<Layout><SettingPage /></Layout>} />
                 <Route path='/user' element={<Layout><UserPage /></Layout>} />
                 <Route path='/signin' element={<Layout><SigninPage /></Layout>} />
                 <Route path='/signup' element={<Layout><SignupPage /></Layout>} />
+                <Route path="/privacy" element={<Layout><PrivacyPage /></Layout>} />
+
+                <Route path='/play' element={<LayoutPlay><PlayPage /></LayoutPlay>} />
 
                 <Route path="*" element={<Layout><NotFoundPage /></Layout>} />
             </Routes>
